@@ -17,7 +17,11 @@ Then import the library with:
 import com.streamr.labs.StreamrReceiver;
 ```
 
+Then add the receiver to your Spark executor with:
+
 ```
 JavaDStream<String> streamrReceiverStream = jssc.receiverStream(new StreamrReceiver("YOUR_STREAMR_API_KEY","YOUR_STREAM_ID"));
 
 ```
+
+For examples go to https://github.com/streamr-dev/streamr-spark-integrations
