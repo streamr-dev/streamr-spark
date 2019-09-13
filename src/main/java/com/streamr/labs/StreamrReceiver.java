@@ -2,10 +2,10 @@ package com.streamr.labs;
 
 import com.streamr.client.options.SigningOptions;
 import com.streamr.client.options.StreamrClientOptions;
+import com.streamr.client.subs.Subscription;
 import org.apache.spark.storage.StorageLevel;
 import org.apache.spark.streaming.receiver.Receiver;
 import com.streamr.client.StreamrClient;
-import com.streamr.client.Subscription;
 import com.streamr.client.authentication.ApiKeyAuthenticationMethod;
 import com.streamr.client.authentication.AuthenticationMethod;
 import com.streamr.client.MessageHandler;

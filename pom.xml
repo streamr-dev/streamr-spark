@@ -6,7 +6,7 @@
 
     <groupId>com.streamr.labs</groupId>
     <artifactId>streamr_spark</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
     <packaging>jar</packaging>
 
     <name>Streamrspark</name>
@@ -62,7 +62,7 @@
         <dependency>
             <groupId>com.streamr</groupId>
             <artifactId>client</artifactId>
-            <version>1.1.0</version>
+            <version>1.1.4</version>
         </dependency>
     </dependencies>
 

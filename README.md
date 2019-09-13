@@ -17,10 +17,37 @@ Then import the library with:
 import com.streamr.labs.StreamrReceiver;
 ```
 
-Then add the receiver to your Spark executor with:
+## Spark Streaming example
 
 ```
-JavaDStream<String> streamrReceiverStream = jssc.receiverStream(new StreamrReceiver("YOUR_STREAMR_API_KEY","YOUR_STREAM_ID"));
+public class Streamrspark {
+
+      public static void main(String[] args) {
+      SparkConf conf = new SparkConf();
+      conf.setAppName("Streamrspark");
+      JavaStreamingContext jssc = 
+        new JavaStreamingContext(conf, Durations.seconds(1));
+      JavaDStream<String> streamrReceiverStream = jssc.receiverStream(
+        new StreamrReceiver("STREAMR_API_KEY","STREAM_ID"));
+
+      JavaDStream<String> filtered = streamrReceiverStream.filter(
+          new Function<String, Boolean>() {
+            @Override
+            public Boolean call(String s) throws Exception {
+                return s.contains("6T");
+            }
+        });
+      filtered.count().print();
+
+      jssc.start();
+      try {
+          jssc.awaitTermination();
+      } catch (InterruptedException e) {
+          e.printStackTrace();
+      }
+  }
+
+}
 
 ```
 
