@@ -51,4 +51,11 @@ public class Streamrspark {
 
 ```
 
+## Running
+
+You have to add all these packages to your spark-submit script or shade the package. The requirement manual imports will be fixed in the future. 
+
+```
+--packages com.streamr.labs:streamr_spark:0.2,com.streamr:client:1.1.0,org.apache.logging.log4j:log4j-core:2.9.0,org.apache.logging.log4j:log4j-api:2.9.0,org.apache.logging.log4j:log4j-slf4j-impl:2.9.0
+```
 For examples go to https://github.com/streamr-dev/streamr-spark-integrations
