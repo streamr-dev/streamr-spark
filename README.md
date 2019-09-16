@@ -14,7 +14,7 @@ Add this to your pom.xml file:
 Then import the library with:
 
 ```
-import com.streamr.labs.StreamrReceiver;
+import com.streamr.labs.streamr_spark.StreamrReceiver;
 ```
 
 ## Spark Streaming example
