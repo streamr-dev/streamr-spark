@@ -1,4 +1,4 @@
-package com.streamr.labs;
+package com.streamr.labs.streamr_spark;
 
 import com.streamr.client.options.SigningOptions;
 import com.streamr.client.options.StreamrClientOptions;
