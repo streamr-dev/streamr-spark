@@ -7,7 +7,7 @@ Add this to your pom.xml file:
 <dependency>
   <groupId>com.streamr.labs</groupId>
   <artifactId>streamr_spark</artifactId>
-  <version>0.1</version>
+  <version>0.2</version>
 </dependency>
 ```
 
