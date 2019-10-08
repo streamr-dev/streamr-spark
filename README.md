@@ -51,6 +51,17 @@ public class Streamrspark {
 
 ```
 
+You can also do historical data resends from Streamr with:
+```
+// Specifies the amount of data points to be resent.
+int resendLast = 10000;
+JavaDStream<String> streamrReceiverStream = jssc.receiverStream(
+        new StreamrReceiver("STREAMR_API_KEY","STREAM_ID", resendLast));
+
+```
+
+In the future historical resends based on timestamps will be implemented.
+
 ## Running
 
 You have to add all these packages to your spark-submit script or shade the package. The requirement manual imports will be fixed in the future. 

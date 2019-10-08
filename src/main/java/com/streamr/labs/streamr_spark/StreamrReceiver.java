@@ -1,5 +1,7 @@
 package com.streamr.labs.streamr_spark;
 
+import com.streamr.client.options.ResendLastOption;
+import com.streamr.client.options.ResendOption;
 import com.streamr.client.options.SigningOptions;
 import com.streamr.client.options.StreamrClientOptions;
 import com.streamr.client.subs.Subscription;
@@ -12,18 +14,30 @@ import com.streamr.client.MessageHandler;
 import com.streamr.client.protocol.message_layer.StreamMessage;
 import com.streamr.client.rest.Stream;
 
+import java.beans.Transient;
 import java.io.IOException;
 
 public class StreamrReceiver extends Receiver<String>{
 
     String apiKey;
     String streamId;
+    // Declared as transient to avoid not serializable exception in Spark's runtime.
+    transient ResendOption resend;
 
     public StreamrReceiver(String apiKey, String streamId) {
         super(StorageLevel.MEMORY_AND_DISK_2());
 
         this.apiKey = apiKey;
         this.streamId = streamId;
+        this.resend = new ResendLastOption(0);
+    }
+
+    public StreamrReceiver(String apiKey, String streamId, int resendLast) {
+        super(StorageLevel.MEMORY_AND_DISK_2());
+
+        this.apiKey = apiKey;
+        this.streamId = streamId;
+        this.resend = new ResendLastOption(resendLast);
     }
 
     @Override
@@ -48,13 +62,13 @@ public class StreamrReceiver extends Receiver<String>{
             ));
             try {
                 Stream stream = client.getStream(streamId);
-                Subscription sub = client.subscribe(stream, new MessageHandler() {
+                Subscription sub = client.subscribe(stream,0, new MessageHandler() {
                     @Override
                     public void onMessage(Subscription s, StreamMessage message) {
                         // Here you can react to the latest messager
                         store(message.getSerializedContent());
                     }
-                });
+                }, this.resend);
             } catch (IOException e) {
                 restart("Trying to connect again");
             }
